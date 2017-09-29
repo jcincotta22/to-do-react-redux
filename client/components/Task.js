@@ -1,6 +1,5 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { putChangeStatus, deleteTask } from '../../redux/reducer';
+
 const Task = ({Obj, isComplete, Name, deleteTask, putChangeStatus}) => {
   return (
       <div className="row">
@@ -13,5 +12,5 @@ const Task = ({Obj, isComplete, Name, deleteTask, putChangeStatus}) => {
       </div>
   );
 };
-const mapDispatch = {putChangeStatus, deleteTask};
-export default connect(null, mapDispatch)(Task);
+
+export default Task;

@@ -4,11 +4,13 @@ const GET_ALL_TASKS = "GET_ALL_TASKS";
 const POST_TASK = "POST_TASK";
 const CHANGE_STATUS = "CHANGE_STATUS";
 const DELETE_TASK = "DELETE_TASK";
+const HIT_SERVER = "HIT_SERVER";
 /////////////////ACTIONS//////////////
 const getTasks = (tasks) => ({type: GET_ALL_TASKS, tasks});
 const addTask = (task) => ({type: POST_TASK, task});
 const changeStatus = (task) => ({type: CHANGE_STATUS, task});
 const taskDelete = (slug) => ({type: DELETE_TASK, slug});
+const serverHit = () => ({type: HIT_SERVER})
 /////////////////REDUCER/////////////////////
 //initiate your starting state
 let initial = {
@@ -32,6 +34,8 @@ const reducer = (state = initial, action) => {
         return !(task.slug === action.slug);
       });
       return Object.assign({}, state, {tasks: arr});
+    case HIT_SERVER:
+      return state;
     default:
       return state;
   }
@@ -91,10 +95,19 @@ export const deleteTask = (slug) => (dispatch) => {
   dispatch(taskDelete(slug));
   axios.delete(`https://api.cosmicjs.com/v1/c1dd4310-a4a2-11e7-8527-2f7edadb33c5/${slug}`)
     .then((response) => {
-    console.log(response.data)
+      console.log(response.data)
     })
     .catch((err) => {
       console.error.bind(err);
+    })
+};
+
+export const hitServer = () => (dispatch) => {
+  dispatch(serverHit());
+  axios.get('/about')
+    .then((request, response) => {
+      console.log("request", request)
+      console.log("response", response)
     })
 };
 const formatSlug = (title) => {

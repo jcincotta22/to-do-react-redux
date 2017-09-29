@@ -1,9 +1,7 @@
 import { connect } from 'react-redux';
-import { getAllTasks, postNewTask } from '../../redux/reducer';
+import { getAllTasks, postNewTask, hitServer } from '../../redux/reducer';
 import Home from '../components/Home';
 
-console.log(tasks)
-
 const mapState = ({tasks}) => ({tasks});
-const mapDispatch = {getAllTasks, postNewTask};
+const mapDispatch = {getAllTasks, postNewTask, hitServer};
 export default connect(mapState, mapDispatch)(Home);

@@ -14,8 +14,13 @@ app.use(function (err, req, res, next) {
 
 // handle every other route with index.html, which will contain
 // a script tag to our application's JavaScript file(s).
-app.get('*', function (request, response) {
+app.get('/', function (request, response) {
   response.sendFile(path.resolve(__dirname, '..', 'client', 'index.html'))
+});
+
+app.get('/about', function (req, res) {
+  console.log('sever!!!')
+  res.send({ user: 'tobi' });
 });
 //listen on port 3000
 app.listen(process.env.PORT || 3000, function () {

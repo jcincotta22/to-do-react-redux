@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
-import { connect } from 'react-redux';
-import { getAllTasks, postNewTask } from '../../redux/reducer';
-import Task from './Task';
+import Task from '../containers/Task';
+
 class Home extends Component {
   constructor(props){
     super(props);
@@ -21,6 +20,7 @@ class Home extends Component {
                evt.preventDefault();
                {evt.target.taskName.value != '' &&
                this.props.postNewTask(evt.target.taskName.value);
+               this.props.hitServer();
                evt.target.taskName.value = "" }
               }
              }>
@@ -53,6 +53,5 @@ class Home extends Component {
     )
   }
 }
-const mapState = ({tasks}) => ({tasks});
-const mapDispatch = {getAllTasks, postNewTask};
-export default connect(mapState, mapDispatch)(Home);
+
+export default Home;
